@@ -14,16 +14,42 @@ export default function App() {
 
   // --------------------------------------------
 
+  // Handle URL parsing and browser navigation
   useEffect(() => {
-    const currentPath = window.location.pathname;
-    const pathParts = currentPath.slice(1).split('/');
-    
-    if (pathParts.length === 2 && pathParts[0] && pathParts[1]) {
-      const ownerFromUrl = pathParts[0];
-      const repoFromUrl = pathParts[1];
+    const handleUrlChange = () => {
+      const currentPath = window.location.pathname;
+      console.log('Current path:', currentPath); // Debug log
       
-      startAnalysis(ownerFromUrl, repoFromUrl);
-    }
+      const pathParts = currentPath.slice(1).split('/').filter(part => part.length > 0);
+      console.log('Path parts:', pathParts); // Debug log
+      
+      if (pathParts.length === 2 && pathParts[0] && pathParts[1]) {
+        const ownerFromUrl = pathParts[0];
+        const repoFromUrl = pathParts[1];
+        
+        console.log('Found owner/repo in URL:', ownerFromUrl, repoFromUrl); // Debug log
+        
+        setRepositoryInfo({
+          owner: ownerFromUrl,
+          repo: repoFromUrl
+        });
+        
+        setCurrentPage('summary');
+      } else {
+        // If URL doesn't match owner/repo pattern, show home page
+        setCurrentPage('home');
+      }
+    };
+
+    // Handle initial page load
+    handleUrlChange();
+
+    // Handle browser back/forward navigation
+    window.addEventListener('popstate', handleUrlChange);
+
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+    };
   }, []);
 
   // --------------------------------------------
@@ -35,6 +61,9 @@ export default function App() {
     });
     
     setCurrentPage('summary');
+    
+    // Update URL without page reload
+    window.history.pushState(null, '', `/${ownerName}/${repoName}`);
   };
 
   // --------------------------------------------
