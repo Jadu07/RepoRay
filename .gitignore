@@ -1,5 +1,13 @@
 Backend/.env
 
+/backend/test-full-analysis.js
+Backend/test-full-analysis.js
+
+/backend/test-openrouter.js
+Backend/test-openrouter.js
+
+
+
 # Environment variables
 .env
 .env.local

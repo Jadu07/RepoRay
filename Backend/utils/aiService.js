@@ -1,3 +1,6 @@
+
+
+
 function getFallbackAnalysis() {
   return {
     summary: "AI Services is currently down, please try again later.",
@@ -11,10 +14,10 @@ function getFallbackAnalysis() {
   };
 }
 
-
-
 async function analyzeRepository(prompt) {
   try {
+    console.log('Starting AI analysis... (Prompt length:', prompt.length, ')');
+
     const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -26,14 +29,23 @@ async function analyzeRepository(prompt) {
         messages: [
           { role: 'system', content: 'You are a code analyzer. Return only JSON.' },
           { role: 'user', content: prompt }
-        ]
+        ],
+        max_tokens: 2000,
+        temperature: 0.7
       })
     });
+
+    if (!res.ok) throw new Error(`API ${res.status}: ${JSON.stringify(await res.json())}`);
+
     const data = await res.json();
-    let text = data.choices[0].message.content;
-    if (!text.startsWith('{')) text = text.slice(text.indexOf('{'), text.lastIndexOf('}')+1);
-    return JSON.parse(text);
-  } catch {
+    const text = (data.choices?.[0]?.message?.content || "").trim();
+    if (!text) throw new Error("Empty AI response");
+
+    const jsonText = text.startsWith("{") ? text : text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1);
+    return JSON.parse(jsonText);
+
+  } catch (err) {
+    console.error('Analysis failed:', err.message);
     return getFallbackAnalysis();
   }
 }
