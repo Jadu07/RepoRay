@@ -1,10 +1,13 @@
 Backend/.env
 
-/backend/test-full-analysis.js
-Backend/test-full-analysis.js
+/backend/test.js
+Backend/test.js
 
-/backend/test-openrouter.js
-Backend/test-openrouter.js
+/backend/testai.js
+Backend/testai.js
+
+/backend/test-or.js
+Backend/test-or.js
 
 
 

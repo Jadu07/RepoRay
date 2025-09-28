@@ -30,7 +30,7 @@ async function analyzeRepository(prompt) {
           { role: 'system', content: 'You are a code analyzer. Return only JSON.' },
           { role: 'user', content: prompt }
         ],
-        max_tokens: 2000,
+        max_tokens: 1500,
         temperature: 0.7
       })
     });
