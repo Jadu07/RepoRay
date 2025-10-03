@@ -25,7 +25,7 @@ async function analyzeRepository(prompt) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'meta-llama/llama-3.2-3b-instruct:free',
+        model: 'google/gemma-2-9b-it:free',
         messages: [
           { role: 'system', content: 'You are a code analyzer. Return only JSON.' },
           { role: 'user', content: prompt }
