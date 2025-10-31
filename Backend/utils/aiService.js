@@ -25,7 +25,7 @@ async function analyzeRepository(prompt) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'google/gemma-2-9b-it:free',
+        model: 'deepseek/deepseek-chat-v3.1:free',
         messages: [
           { role: 'system', content: 'You are a code analyzer. Return only JSON.' },
           { role: 'user', content: prompt }
