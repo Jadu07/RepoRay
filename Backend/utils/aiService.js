@@ -18,20 +18,21 @@ async function analyzeRepository(prompt) {
   try {
     console.log('Starting AI analysis... (Prompt length:', prompt.length, ')');
 
-    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    const res = await fetch(process.env.POLLINATION_API_URL, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        'Authorization': `Bearer ${process.env.POLLINATION_API_KEY}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'deepseek/deepseek-chat-v3.1:free',
+        model: 'gemini-fast',
         messages: [
           { role: 'system', content: 'You are a code analyzer. Return only JSON.' },
           { role: 'user', content: prompt }
         ],
         max_tokens: 1500,
-        temperature: 0.7
+        temperature: 0.7,
+        response_format: { type: "json_object" }
       })
     });
 
@@ -41,6 +42,7 @@ async function analyzeRepository(prompt) {
     const text = (data.choices?.[0]?.message?.content || "").trim();
     if (!text) throw new Error("Empty AI response");
 
+    // Pollinations with response_format should return clean JSON, but we keep the safety check
     const jsonText = text.startsWith("{") ? text : text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1);
     return JSON.parse(jsonText);
 

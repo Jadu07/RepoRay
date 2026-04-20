@@ -6,7 +6,7 @@ const { analyzeRepository: analyzeWithAI } = require('./utils/aiService');
 const { buildAnalysisPrompt } = require('./utils/promptBuilder');
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: '*' }));
 
 app.get('/api/summary/:user/:repo', async (req, res) => {
   const { user, repo } = req.params;

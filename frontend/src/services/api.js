@@ -1,5 +1,4 @@
-const SERVER_URL = 'https://reporay-backend.vercel.app/api';
-// const SERVER_URL ='http://localhost:3001/api';
+const SERVER_URL = import.meta.env.VITE_API_URL;
 export const getRepositoryAnalysis = async (owner, repo) => {
   const res = await fetch(`${SERVER_URL}/summary/${owner}/${repo}`);
   if (!res.ok) {
