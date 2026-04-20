@@ -67,6 +67,19 @@ export default function App() {
           <HomePage onAnalysisStart={startAnalysis} />
         )}
       </div>
+
+      <footer className="fixed bottom-4 right-4 z-20 text-xs text-white/50 hover:text-white/80 transition-colors">
+        <a 
+          href="https://pollinations.ai" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2"
+        >
+          <span>Built with</span>
+          <img src="https://raw.githubusercontent.com/pollinations/pollinations/main/assets/logo.svg" alt="Pollinations.ai" className="h-4" />
+          <span className="font-semibold">Pollinations.ai</span>
+        </a>
+      </footer>
     </div>
   );
 }

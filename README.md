@@ -1,5 +1,7 @@
 # RepoRay 🔍
 
+[![Built With Pollinations.ai](https://raw.githubusercontent.com/pollinations/pollinations/main/assets/logo.svg)](https://pollinations.ai)
+
 **AI-Powered GitHub Repository Analyzer**
 
 RepoRay is an intelligent web application that provides instant, comprehensive analysis of any public GitHub repository. Simply paste a GitHub URL and get detailed insights about the codebase, technology stack, setup instructions, and more—all powered by advanced AI.
@@ -225,6 +227,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
+- **[Pollinations.ai](https://pollinations.ai)** for the intelligent AI analysis engine
+  - ![Pollinations Logo](https://raw.githubusercontent.com/pollinations/pollinations/main/assets/logo.svg)
 - **GitHub** for repository data access
 - **Tailwind CSS** for beautiful styling
 - **React** community for excellent documentation
